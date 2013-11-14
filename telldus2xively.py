@@ -19,7 +19,7 @@ client = oauth.Client(consumer,token)
 while(1):
     try:
         resp, content = client.request('https://api.telldus.com/json/sensors/list?includeValues=1', "GET")
-        sensor = json.loads(content)['sensor']
+        sensor = json.loads(content)['inne']
         data = { "version": "1.0.0", "datastreams": [] }
         for s in sensor:
             atTime = time.strftime("%Y-%m-%dT%XZ",time.gmtime(s["lastUpdated"]))
