@@ -23,11 +23,10 @@ while(1):
         data = { "version": "1.0.0", "datastreams": [] }
         for s in sensor:
             atTime = time.strftime("%Y-%m-%dT%XZ",time.gmtime(s["lastUpdated"]))
-            print s["clientName"]+ "_" + s["name"] + ": " + s["temp"] + " " + s["humidity"] + "%  t: " + str(s["lastUpdated"])
+            print s["clientName"]+ "_" + s["name"] + ": " + s["temp"] + " " + "%  t: " + str(s["lastUpdated"])
             data["datastreams"].append({ "id": s["clientName"]+ "_" + s["name"] + "_temp",
                                     "datapoints": [{ "at": atTime, "value": s["temp"] }]})
-            data["datastreams"].append({ "id": s["clientName"]+ "_" + s["name"] + "_hum",
-                                    "datapoints": [{ "at": atTime, "value": s["humidity"] }]})
+      
         r = requests.put(XIVELY_URL, data=json.dumps(data), headers=XIVELY_HEADERS)
         time.sleep(600)
     except (KeyboardInterrupt, SystemExit):
